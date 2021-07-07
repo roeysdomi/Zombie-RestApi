@@ -24,7 +24,7 @@ const updateloc=async(name,loc)=>
 {
 
    try{
-  return await user.findOneAndUpdate({name:name},
+       return await srv.findOneAndUpdate({name:name},
     {
       $set:
       {
