@@ -34,6 +34,21 @@ router.post('/addsurvivor', async (req, res) => {
   }
 
 })
+router.post('/updateloc', async (req, res) => {
+  try {
+    console.log(req.body)
+    let name=req.body.name
+    let loc=JSON.parse(req.body.last_location)
+
+
+  const result= await  monfunc.updateloc(name,loc)
+   await  res.status(200).json(result)
+  } catch(err) {
+    console.log("errorrr:"+err)
+    await  res.status(400).json(err)
+  }
+
+})
 router.post('/trade', async (req, res) => {
   try {
 

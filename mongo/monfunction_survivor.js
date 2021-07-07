@@ -20,19 +20,22 @@ const addSurvivor=async(thesurvivor)=>
   return await add.save()
 }
 
-const updateloc=(srv,loc)=>
+const updateloc=async(name,loc)=>
 {
 
-
-  return  user.findOneAndUpdate({name:srv.name},
+   try{
+  return await user.findOneAndUpdate({name:name},
     {
       $set:
       {
-        "last_location.latitude":loc.lat,
-        "last_location.longitude":loc.lon,
+        last_location:loc
       }
     },
     {new:true});
+  }catch
+  {
+    return "didnt update the survivor location"
+  }
 }
 const updateInventory=(srviv)=>
 {
@@ -208,6 +211,7 @@ const getsrv=async(name)=>
 //----------------------------
 exports.addSurvivor=addSurvivor;
 exports.survivorTrade=survivorTrade;
+exports.updateloc=updateloc;
 
 
 //-----------------------------
