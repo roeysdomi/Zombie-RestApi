@@ -29,7 +29,7 @@ const addreport=async(name)=>
        last_location:srviv.last_location,
      })
      savereport.save()
-     return "report approved"
+     return "report approved , first one in this area"
    }
 
 
@@ -37,18 +37,18 @@ const addreport=async(name)=>
 const checkIf3=async(loc)=>
 {
   let report=await getreport(loc)
-  if(report.reports===3)
+  if(report.reports>=3)
   {
       return updateInfected(loc)
   }
-  return "report without mass infected"
+  return "report accpeted , no mass infection yet"
 
 }
 const updateInfected=async(loc)=>
 {
   try{
    await srv.updateMany({last_location:loc},{$set:{isInfected:"True"}},{new:true})
-   return "update infected"
+   return "All the users in this area were infected"
  }catch
  {
      return "error in update infected"
