@@ -4,7 +4,7 @@ var srv = require('../model/Survivor');
 var vir = require('../model/Virus');
 
 
-//
+//main function add report to the viri database (virus db)
 const addreport=async(name)=>
 {
     const srviv=await getsrv(name)
@@ -34,6 +34,7 @@ const addreport=async(name)=>
 
 
 }
+// Helper function check if its reached 3 reports for the same location
 const checkIf3=async(loc)=>
 {
   let report=await getreport(loc)
@@ -44,6 +45,7 @@ const checkIf3=async(loc)=>
   return "report accpeted , no mass infection yet"
 
 }
+// helper function -update all users in the same location as infected
 const updateInfected=async(loc)=>
 {
   try{
@@ -56,7 +58,7 @@ const updateInfected=async(loc)=>
 
 }
 
-
+//helper function
 const getsrv=async(name)=>
 {
      try{
@@ -69,7 +71,7 @@ const getsrv=async(name)=>
         }
 
 }
-
+//get report base on location
 const getreport=async(loc)=>
 {
      try{

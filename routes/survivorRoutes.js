@@ -8,16 +8,14 @@ const monfunc=require('../mongo/monfunction_survivor')
 const monfunc_virus=require('../mongo/monfunction_virus')
 const monfunc_status=require('../mongo/monfunction_status')
 
-// const flash = require('express-flash')
-// const session = require('express-session')
-// const methodOverride = require('method-override')
+
 ///--------------------------------------------------------
 
+// add survivor request the main function located in mongo->survivor
 
 router.post('/addsurvivor', async (req, res) => {
   try {
     console.log(req.body)
-    // const hashedPassword = await bcrypt.hash(req.body.password, 10)
     let surviv={
       name:req.body.name,
       age:req.body.age,
@@ -34,6 +32,8 @@ router.post('/addsurvivor', async (req, res) => {
   }
 
 })
+
+// update location request the main function located in mongo->survivor
 router.post('/updateloc', async (req, res) => {
   try {
     console.log(req.body)
@@ -49,10 +49,11 @@ router.post('/updateloc', async (req, res) => {
   }
 
 })
+
+// trade request the main function located in mongo->survivor
 router.post('/trade', async (req, res) => {
   try {
 
-    // const hashedPassword = await bcrypt.hash(req.body.password, 10)
     const survivor1=JSON.parse(req.body.surviver1)
     const survivor2=JSON.parse(req.body.surviver2)
 
@@ -72,10 +73,11 @@ router.post('/trade', async (req, res) => {
   }
 
 })
+
+//  report request  the main function located in mongo->virus
 router.post('/addreport', async (req, res) => {
   try {
 
-    // const hashedPassword = await bcrypt.hash(req.body.password, 10)
     const name=req.body.name
 
     const result= await  monfunc_virus.addreport(name)
@@ -87,6 +89,8 @@ router.post('/addreport', async (req, res) => {
   }
 
 })
+
+// status request the main function located in mongo->status
 router.get('/', async (req, res) => {
   try {
 

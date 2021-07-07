@@ -4,8 +4,7 @@ var srv = require('../model/Survivor');
 
 const bcrypt = require('bcrypt')
 
-// -------------------enterfunctions-------------------------
-//
+//add survivor to db
 const addSurvivor=async(thesurvivor)=>
 {
       const {name,age,last_location,isInfected,inventory}=thesurvivor
@@ -19,9 +18,11 @@ const addSurvivor=async(thesurvivor)=>
 
   return await add.save()
 }
-
+//find user by name and update the location if his not infected
 const updateloc=async(name,loc)=>
 {
+  let survivor1=await getsrv(name)
+  if(survivor1.isInfected.localeCompare("True")==0){return "survivor infected cant update loc"}
 
    try{
        return await srv.findOneAndUpdate({name:name},
@@ -37,6 +38,7 @@ const updateloc=async(name,loc)=>
     return "didnt update the survivor location"
   }
 }
+//helper function
 const updateInventory=(srviv)=>
 {
 
@@ -50,11 +52,11 @@ const updateInventory=(srviv)=>
     },
     {new:true});
 }
-// --------------------updatesfunctions----------------------
-
+//main function of trade get 2 survivor and try to trade between them
 const survivorTrade=async(srv1,srv2)=>
 {
   let survivor1=await getsrv(srv1.name)
+  if(survivor1.isInfected.localeCompare("True")==0){return "survivor infected cant trade"}
   const trade1=await srv1.trade
 
   let sum1=0;
@@ -65,6 +67,8 @@ const survivorTrade=async(srv1,srv2)=>
   else{return "survivor1 dosent have the actuall inventory"}
 
   let survivor2=await getsrv(srv2.name)
+  if(survivor2.isInfected.localeCompare("True")==0){return "survivor infected cant trade"}
+
   const trade2=srv2.trade
   let sum2=0;
   if(checkIfExsit(survivor2,trade2))
@@ -94,6 +98,7 @@ const survivorTrade=async(srv1,srv2)=>
    return "the sums of both survivors do not match"
 
 }
+//helper function
 const checkIfExsit=(srviv,trade)=>
 {
 
@@ -124,6 +129,7 @@ const checkIfExsit=(srviv,trade)=>
     }
     return true
 }
+//helper function
 const sumTrade=(trade)=>
 {
     console.log(sumTrade)
@@ -147,6 +153,7 @@ const sumTrade=(trade)=>
   return sum
 
 }
+//helper function
 const removeTrade=(srviv,trade)=>
 {
   console.log(removeTrade)
@@ -168,6 +175,7 @@ const removeTrade=(srviv,trade)=>
   }
   return srviv
 }
+//helper function
 const addTrade=(srviv,trade)=>
 {
   if(trade.water)
@@ -188,7 +196,7 @@ const addTrade=(srviv,trade)=>
   }
   return srviv
 }
-
+//helper function -get survivor
 const getsrv=async(name)=>
 {
      try{

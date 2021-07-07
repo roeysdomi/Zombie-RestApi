@@ -16,23 +16,23 @@ const survivorapi=require('./routes/survivorRoutes')
 
 ///============================
 
-initializePassport(
-  passport,
-  async email =>{
-    const usr= await monfunc.getuser(email)
-    if (usr){
-       console.log("found user: "+usr) ;
-       return usr
-     }
-  } ,
-async id =>
-  {
-    const usr=await monfunc.getuserbyId(id)
-    if (usr) {
-      return usr
-     }
-  }
-)
+// initializePassport(
+//   passport,
+//   async email =>{
+//     const usr= await monfunc.getuser(email)
+//     if (usr){
+//        console.log("found user: "+usr) ;
+//        return usr
+//      }
+//   } ,
+// async id =>
+//   {
+//     const usr=await monfunc.getuserbyId(id)
+//     if (usr) {
+//       return usr
+//      }
+//   }
+// )
 
 
 
@@ -62,6 +62,7 @@ mongoose
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 ///========================================
+//routes of survivor
 app.use(survivorapi)
 
 // app.use(notFound)

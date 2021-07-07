@@ -4,7 +4,7 @@ var srv = require('../model/Survivor');
 var vir = require('../model/Virus');
 
 
-//
+//main function create the status object
 const getStatus=async()=>
 {
     try{
@@ -22,6 +22,7 @@ const getStatus=async()=>
 
 
 }
+// helper function calc the average
 const average=(power,users)=>
 {
   let water=0;
@@ -48,6 +49,7 @@ const average=(power,users)=>
   })
   return {water:water,food:food,medication:medication,ammunition:ammunition}
 }
+// helper function 
 const sumpoint=(users)=>
 {
   let sum=0;
