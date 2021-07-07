@@ -59,7 +59,7 @@ const survivorTrade=async(srv1,srv2)=>
   {
      sum1=sumTrade(trade1)
   }
-  else{return false}
+  else{return "survivor1 dosent have the actuall inventory"}
 
   let survivor2=await getsrv(srv2.name)
   const trade2=srv2.trade
@@ -67,7 +67,7 @@ const survivorTrade=async(srv1,srv2)=>
   if(checkIfExsit(survivor2,trade2))
   {
      sum2=sumTrade(trade2)
-  } else{return false}
+  } else{return "survivor2 dosent have the actuall inventory"}
 
   if(sum1==sum2)
   {
@@ -88,6 +88,7 @@ const survivorTrade=async(srv1,srv2)=>
     }
 
   }
+   return "the sums of both survivors do not match"
 
 }
 const checkIfExsit=(srviv,trade)=>
